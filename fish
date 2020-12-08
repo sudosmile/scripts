@@ -1,0 +1,1 @@
+/home/sudosmile/.config/fish/functions/

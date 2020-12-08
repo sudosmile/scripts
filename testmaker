@@ -1,0 +1,14 @@
+#!/bin/bash
+for f in *.c;
+do 
+    mkdir -p $1
+    touch "$1/test_$f" && echo "/*
+** EPITECH PROJECT, 2020
+** test_${f}
+** File description:
+** criterion test file
+*/" >> "$1/test_$f"
+    echo "" >> "$1/test_$f"
+    echo '#include "criterion/criterion.h"' >> "$1/test_$f"
+    echo '#include "criterion/redirect.h"' >> "$1/test_$f"
+done

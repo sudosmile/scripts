@@ -1,0 +1,17 @@
+#!/bin/bash
+
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+MAGENTA='\033[0;35m'
+CYAN='\033[0;36m'
+YELLOW="\033[38;5;11m"
+WHITE='\033[0;37m'
+RESET='\033[0m'
+
+# write help line in color
+# read -p behaves weirdly, so we just make it call echo manually so we can append the -e option to echa
+read -p "$(echo -e "${RED}task name${RESET}: ")" tname
+read -p "$(echo -e "${BLUE}due date (YYYY-MM-DD)${RESET}: ")" ddate
+
+task add ${tname} due:${ddate}

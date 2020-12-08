@@ -1,0 +1,43 @@
+#!/bin/bash
+
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+MAGENTA='\033[0;35m'
+CYAN='\033[0;36m'
+YELLOW="\033[38;5;11m"
+WHITE='\033[0;37m'
+RESET='\033[0m'
+
+# write help line in color
+# read -p behaves weirdly, so we just make it call echo manually so we can append the -e option to echa
+read -p "$(echo -e "$GREEN{a}dded${RESET} / $RED{r}emoved${RESET} / $BLUE{m}odified${RESET} / $MAGENTA{f}ixed${RESET} / $RESET{q}uit:  ")" INPUT_STRING
+
+#only get first letter of flag chooser
+read -N 1 initial <<< "${INPUT_STRING}"
+case $initial in
+    a)
+        echo ""
+        read -p "$(echo -e "${YELLOW}enter commit msg : $RESET")" MSG
+        git commit -m "{added} $MSG"
+        ;;
+    r)
+        echo ""
+        read -p "$(echo -e "${YELLOW}enter commit msg : $RESET")" MSG
+        git commit -m "{removed} $MSG"
+        ;;
+    m)
+        echo ""
+        read -p "$(echo -e "${YELLOW}enter commit msg : $RESET")" MSG
+        git commit -m "{modified} $MSG"
+        ;;
+    f)
+        echo ""
+        read -p "$(echo -e "${YELLOW}enter commit msg : $RESET")" MSG
+        git commit -m "{fixed} $MSG"
+        ;;
+    q)
+        exit 0
+esac
+git push
+echo "done"
