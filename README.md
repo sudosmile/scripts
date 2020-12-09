@@ -4,52 +4,54 @@ I highly recommend adding this folder to path, If anyone finds some of these int
 
 Thank you for checking this you, good avo.
 
-## addtask
+## File descriptions :
+
+### addtask
 prompt name and date to add tasks to taskwarrior
 
-## commit
+### commit
 prompt commit with my own norm and a messsage NO GIT PUSH
 
-## empty
+### empty
 empties my /home/$USERNAME/tmp
 
-## gogh
+### gogh
 call gogh to change terminal colour scheme
 (you might want add an alias that calls this script with (bash gogh) idk why)
 
-## normtest
+### normtest
 call the NormEz.rb file contained in /home/$USRNAME/.ressources/
 
-## pcommit
+### pcommit
 prompt commit with my own norm and a message with a git push
 
-## push
+### push
 calls git push. thats it. its just shorter kekW
 
-## reboot
+### reboot
 calls a systemctl reboot
 
-## rme
+### rme
 remove all files with extension given as args
 
-## rms
+### rms
 move all files in args to ~/tmp
 
-## rws
+### rws
 remove trailing whitespace in file given as args
 
-## testmaker
+### testmaker
 make a file with necessary things for criterion test
 
-## touchs
+### touchs
 creates a file with name given as arg, adds a shebang and makes it executable
 
-## touchsh
+### touchsh
 same as touchs but with .sh extension
 
-## tre
+### tre
 not a bash script, executable from https://github.com/dduan/tre, it's grrrrrreat, look it up
 
-## vexclude
+### vexclude
 opens .git/info/exclude with vim in current folder
 
