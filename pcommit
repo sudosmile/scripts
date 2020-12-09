@@ -19,7 +19,7 @@ case $initial in
     a)
         read -p "$(echo -e "$GREEN{f}ile${RESET} / $RED{c}ode${RESET} / $BLUE{r}essources${RESET} / $MAGENTA{o}thers${RESET} / $RESET{q}uit:  ")" TYPE_STRING
         read -N 1 initiald <<< "${TYPE_STRING}"
-        case $initial in
+        case $initiald in
             f)
                 read -p "$(echo -e "${YELLOW}enter commit msg : $RESET")" MSG
                 git commit -m "{added}{file} $MSG"
@@ -44,7 +44,7 @@ case $initial in
     r)
         read -p "$(echo -e "$GREEN{f}ile${RESET} / $RED{c}ode${RESET} / $BLUE{r}essources${RESET} / $MAGENTA{o}thers${RESET} / $RESET{q}uit:  ")" TYPE_STRING
         read -N 1 initiald <<< "${TYPE_STRING}"
-        case $initial in
+        case $initiald in
             f)
                 read -p "$(echo -e "${YELLOW}enter commit msg : $RESET")" MSG
                 git commit -m "{removed}{file} $MSG"
