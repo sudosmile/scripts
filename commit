@@ -10,20 +10,61 @@ WHITE='\033[0;37m'
 RESET='\033[0m'
 
 # write help line in color
+# read -p behaves weirdly, so we just make it call echo manually so we can append the -e option to echa
 read -p "$(echo -e "$GREEN{a}dded${RESET} / $RED{r}emoved${RESET} / $BLUE{m}odified${RESET} / $MAGENTA{f}ixed${RESET} / $RESET{q}uit:  ")" INPUT_STRING
 
 #only get first letter of flag chooser
 read -N 1 initial <<< "${INPUT_STRING}"
 case $initial in
     a)
+        read -p "$(echo -e "$GREEN{f}ile${RESET} / $RED{c}ode${RESET} / $BLUE{r}essources${RESET} / $MAGENTA{o}thers${RESET} / $RESET{q}uit:  ")" TYPE_STRING
+        read -N 1 initiald <<< "${TYPE_STRING}"
+        case $initiald in
+            f)
+                read -p "$(echo -e "${YELLOW}enter commit msg : $RESET")" MSG
+                git commit -m "{added}{file} $MSG"
+                ;;
+            c)
+                read -p "$(echo -e "${YELLOW}enter commit msg : $RESET")" MSG
+                git commit -m "{added}{code} $MSG"
+                ;;
+            r)
+                read -p "$(echo -e "${YELLOW}enter commit msg : $RESET")" MSG
+                git commit -m "{added}{ressources} $MSG"
+                ;;
+            o)
+                read -p "$(echo -e "${YELLOW}enter commit msg : $RESET")" MSG
+                git commit -m "{added}{others} $MSG"
+                ;;
+            q)
+                ;;
+        esac
         echo ""
-        read -p "$(echo -e "${YELLOW}enter commit msg : $RESET")" MSG
-        git commit -m "{added} $MSG"
         ;;
     r)
+        read -p "$(echo -e "$GREEN{f}ile${RESET} / $RED{c}ode${RESET} / $BLUE{r}essources${RESET} / $MAGENTA{o}thers${RESET} / $RESET{q}uit:  ")" TYPE_STRING
+        read -N 1 initiald <<< "${TYPE_STRING}"
+        case $initiald in
+            f)
+                read -p "$(echo -e "${YELLOW}enter commit msg : $RESET")" MSG
+                git commit -m "{removed}{file} $MSG"
+                ;;
+            c)
+                read -p "$(echo -e "${YELLOW}enter commit msg : $RESET")" MSG
+                git commit -m "{removed}{code} $MSG"
+                ;;
+            r)
+                read -p "$(echo -e "${YELLOW}enter commit msg : $RESET")" MSG
+                git commit -m "{removed}{ressources} $MSG"
+                ;;
+            o)
+                read -p "$(echo -e "${YELLOW}enter commit msg : $RESET")" MSG
+                git commit -m "{removed}{others} $MSG"
+                ;;
+            q)
+                ;;
+        esac
         echo ""
-        read -p "$(echo -e "${YELLOW}enter commit msg : $RESET")" MSG
-        git commit -m "{removed} $MSG"
         ;;
     m)
         echo ""
@@ -32,7 +73,7 @@ case $initial in
         ;;
     f)
         echo ""
-        read -p "$(echo -e "${YELLOW}enter commit msg : $RESET")" MSG
+        read -p "$(echo -e "${YELLOW}enter the fixed error : $RESET")" MSG
         git commit -m "{fixed} $MSG"
         ;;
     q)
