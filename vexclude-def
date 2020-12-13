@@ -1,3 +1,2 @@
 #!/bin/bash
-echo "**/.ccls-cache" >> .git/info/exclude
-echo "rsc/" >> .git/info/exclude
+grep -qxF '**/.ccls-cache' .git/info/exclude || echo '**/.ccls-cache' >> .git/info/exclude
