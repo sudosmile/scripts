@@ -18,7 +18,7 @@ read -N 1 initial <<< "${INPUT_STRING}"
 case $initial in
     a)
         read -p "$(echo -e "$GREEN{f}ile${RESET} / $RED{c}ode${RESET} / $BLUE{r}essources${RESET} / $MAGENTA{o}thers${RESET} / $RESET{q}uit:  ")" TYPE_STRING
-        read -N 1 initiald <<< "${TYPE_STRING}"
+        read -N 2 initiald <<< "${TYPE_STRING}"
         case $initiald in
             f)
                 read -p "$(echo -e "${YELLOW}enter commit msg : $RESET")" MSG
@@ -37,6 +37,18 @@ case $initial in
                 git commit -m "{added}{others} $MSG"
                 ;;
             q)
+                ;;
+            fc)
+                read -p "$(echo -e "${YELLOW}enter commit msg : $RESET")" MSG
+                git commit -m "{added}{file}{code} $MSG"
+                ;;
+            fo)
+                read -p "$(echo -e "${YELLOW}enter commit msg : $RESET")" MSG
+                git commit -m "{added}{file}{others} $MSG"
+                ;;
+            co)
+                read -p "$(echo -e "${YELLOW}enter commit msg : $RESET")" MSG
+                git commit -m "{added}{code}{others} $MSG"
                 ;;
         esac
         echo ""
