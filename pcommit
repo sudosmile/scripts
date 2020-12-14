@@ -11,6 +11,8 @@ RESET='\033[0m'
 
 # write help line in color
 # read -p behaves weirdly, so we just make it call echo manually so we can append the -e option to echa
+vexclude-def
+git add .
 read -p "$(echo -e "$GREEN{a}dded${RESET} / $RED{r}emoved${RESET} / $BLUE{m}odified${RESET} / $MAGENTA{f}ixed${RESET} / $RESET{q}uit:  ")" INPUT_STRING
 
 #only get first letter of flag chooser
