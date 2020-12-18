@@ -11,7 +11,7 @@ RESET='\033[0m'
 
 # write help line in color
 # read -p behaves weirdly, so we just make it call echo manually so we can append the -e option to echa
-vexclude-def
+vexclude-def &>/dev/null
 git add .
 read -p "$(echo -e "$GREEN{a}dded${RESET} / $RED{r}emoved${RESET} / $BLUE{m}odified${RESET} / $MAGENTA{f}ixed${RESET} / $RESET{q}uit:  ")" INPUT_STRING
 
@@ -20,8 +20,7 @@ read -N 1 initial <<< "${INPUT_STRING}"
 case $initial in
     a)
         read -p "$(echo -e "$GREEN{f}ile${RESET} / $RED{c}ode${RESET} / $BLUE{r}essources${RESET} / $MAGENTA{o}thers${RESET} / $RESET{q}uit:  ")" TYPE_STRING
-        read -N 2 initiald <<< "${TYPE_STRING}"
-        case $initiald in
+        case $TYPE_STRING in
             f)
                 read -p "$(echo -e "${YELLOW}enter commit msg : $RESET")" MSG
                 git commit -m "{added}{file} $MSG"
