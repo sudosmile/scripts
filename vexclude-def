@@ -1,2 +1,2 @@
 #!/bin/bash
-grep -qxF '**/.ccls-cache' .git/info/exclude || echo '**/.ccls-cache' >> .git/info/exclude
+grep -qxF '**/tags' .git/info/exclude || echo '**/tags' >> .git/info/exclude
