@@ -12,7 +12,9 @@ endtry
 
 " show number on right
 set number
-
+set autochdir
+set tags=tags;
+set encoding=UTF-8
 
 " match parenthesis color
 "hi MatchParen cterm=none ctermbg=brown ctermfg=gray
@@ -22,9 +24,12 @@ set number
 "set omnifunc=ale#completion#OmniFunc
 
 call plug#begin()
+Plug 'zxqfl/tabnine-vim'
 "Plug 'Valloric/YouCompleteMe'
 "Plug 'haya14busa/incsearch.vim'
 Plug 'ghifarit53/tokyonight-vim'
+Plug 'nathanalderson/yanktohtml'
+Plug 'craigemery/vim-autotag'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'sudosmile/vim-epitech'
@@ -41,12 +46,19 @@ else
     Plug 'roxma/nvim-yarp'
     Plug 'roxma/vim-hug-neovim-rpc'
 endif
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
+
+" Nerdtree options
+let NERDTreeQuitOnOpen = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 
 " Doplete option
 let g:deoplete#enable_at_startup = 1
 
 autocmd FileType c setlocal foldmethod=syntax
+
 
 " dont know about this to be tested
 syntax on
@@ -54,6 +66,12 @@ syntax on
 filetype plugin on
 
 let g:NERDDefaultAlign = 'left'
+
+for prefix in ['n', 'v']
+    for key in ['<Up>', '<Down>', '<Left>', '<Right>']
+        exe prefix . "noremap " . key . " <Nop>"
+    endfor
+endfor
 
 " colorscheme
 set termguicolors
@@ -115,3 +133,13 @@ endfor
 
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
+
+2match none
+map <C-e> <esc>:2match none
+map <C-g> :Goyo<CR>
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
