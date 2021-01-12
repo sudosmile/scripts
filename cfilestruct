@@ -1,0 +1,107 @@
+#!/bin/bash
+
+res="\t"
+
+
+# make source Makefile
+echo -e "
+##
+## EPITECH PROJECT, 2020
+## Makefile
+## File description:
+## makefile
+##
+
+OUTPUTFILE = $1
+
+.PHONY = all
+all:
+${res}make -C src/ all
+${res}cp src/\$(OUTPUTFILE) ./
+
+.PHONY = clean
+clean:
+${res}make -C src/ clean
+
+.PHONY = fclean
+fclean:
+${res}make -C src/ fclean
+${res}rm -f -- \$(OUTPUTFILE)
+
+.PHONY = re
+re:
+${res}rm -f -- \$(OUTPUTFILE)
+${res}make -C src/ re
+${res}cp src/\$(OUTPUTFILE) ./
+" > Makefile
+
+# make folders
+mkdir src
+mkdir src/include
+
+# make header
+echo "
+/*
+** EPITECH PROJECT, 2021
+** include/header
+** File description:
+** header
+*/
+
+#ifndef HEADER_H_
+#define HEADER_H_
+
+#endif /* HEADER_H_ */
+" > src/include/header.h
+
+# make main file
+echo -e "
+/*
+** EPITECH PROJECT, 2020
+** main
+** File description:
+** main
+*/
+
+#include \"./include/header.h\"
+
+int main(int arc, char ** arv, char **env)
+{
+${res}return 0;
+}
+" > src/main.c
+
+# make source makefile
+echo -e "
+##
+## EPITECH PROJECT, 2020
+## Makefile
+## File description:
+## makefile
+##
+
+OUTPUTFILE      =       $1
+
+SRCC            =       main.c
+
+SRCO            =       \$(SRCC:.c=.o)
+
+.PHONY = all
+all:            compile
+
+.PHONY = compile
+compile:        \$(SRCO)
+${res}gcc \$(SRCO) -Iinclude -Wall -o \$(OUTPUTFILE)
+
+.PHONY = clean
+clean:
+${res}rm -f -- \$(SRCO)
+
+.PHONY = fclean
+fclean:
+${res}rm -f -- \$(SRCO)
+${res}rm -f -- \$(OUTPUTFILE)
+
+.PHONY = re
+re:             fclean compile
+" > src/Makefile
