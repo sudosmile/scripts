@@ -4,8 +4,7 @@ res="\t"
 
 
 # make source Makefile
-echo -e "
-##
+echo -e "##
 ## EPITECH PROJECT, 2020
 ## Makefile
 ## File description:
@@ -40,8 +39,7 @@ mkdir src
 mkdir src/include
 
 # make header
-echo "
-/*
+echo "/*
 ** EPITECH PROJECT, 2021
 ** include/header
 ** File description:
@@ -55,8 +53,7 @@ echo "
 " > src/include/header.h
 
 # make main file
-echo -e "
-/*
+echo -e "/*
 ** EPITECH PROJECT, 2020
 ** main
 ** File description:
@@ -67,13 +64,12 @@ echo -e "
 
 int main(int arc, char ** arv, char **env)
 {
-${res}return 0;
+    return 0;
 }
 " > src/main.c
 
 # make source makefile
-echo -e "
-##
+echo -e "##
 ## EPITECH PROJECT, 2020
 ## Makefile
 ## File description:
