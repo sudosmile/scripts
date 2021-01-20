@@ -101,3 +101,8 @@ ${res}rm -f -- \$(OUTPUTFILE)
 .PHONY = re
 re:             fclean compile
 " > src/Makefile
+
+if test -f ".git/info/exclude"; then
+    echo "**/*.[oa]" >> .git/info/exlude
+    echo "**/$1" >> .git/info/exlude
+fi
