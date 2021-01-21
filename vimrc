@@ -10,12 +10,30 @@ source ~/.vim_runtime/my_configs.vim
 catch
 endtry
 
+source ~/.vim/matchit/plugin/matchit.vim
+
+
 " show number on right
-set number
+set relativenumber
+set nu
 set autochdir
 set tags=tags;
 set encoding=UTF-8
+"set noerrorbells
+"set hidden
+set scrolloff=8
+set nowrap
+set incsearch
+set colorcolumn=80
+"set nobackup
 
+" CTRL + _ prints length of selection
+vnoremap <C-_> "-y:echo 'length' strlen(@-)<CR>"
+
+
+
+"testing
+"set nohlsearch
 " match parenthesis color
 "hi MatchParen cterm=none ctermbg=brown ctermfg=gray
 
@@ -30,22 +48,18 @@ Plug 'zxqfl/tabnine-vim'
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'nathanalderson/yanktohtml'
 Plug 'craigemery/vim-autotag'
+Plug 'jiangmiao/auto-pairs'
 Plug 'airblade/vim-gitgutter'
+Plug 'ocaml/vim-ocaml'
+Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'sudosmile/vim-epitech'
 "Plug 'w0rp/ale'
-Plug 'copy/deoplete-ocaml'
 Plug 'preservim/nerdcommenter'
+Plug 'mattn/emmet-vim'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex'  }
 Plug 'lervag/vimtex'
-if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'  }
-else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-endif
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
@@ -54,11 +68,13 @@ let NERDTreeQuitOnOpen = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
-" Doplete option
-let g:deoplete#enable_at_startup = 1
 
 autocmd FileType c setlocal foldmethod=syntax
 
+" emmet
+let g:user_emmet_install_global = 0
+let g:user_emmet_leader_key=','
+autocmd FileType html,css EmmetInstall
 
 " dont know about this to be tested
 syntax on
@@ -87,16 +103,9 @@ autocmd Filetype tex setl updatetime=10
 let g:livepreview_previewer = 'zathura'
 let g:livepreview_cursorhold_recompile = 0
 
-call deoplete#custom#var('omni', 'input_patterns', {
-            \ 'tex': g:vimtex#re#deoplete
-            \})
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
 
-let g:deoplete#complete_method = "complete"
-
-call deoplete#custom#option('ignore_sources', {})
-call deoplete#custom#option('ignore_sources.ocaml', ['buffer', 'around', 'member', 'tag'])
-call deoplete#custom#option('auto_complete_delay', 0)"
 
 " ## added by OPAM user-setup for vim / base ## 93ee63e278bdfc07d1139a748ed3fff2 ## you can edit, but keep this line
 let s:opam_share_dir = system("opam config var share")
