@@ -62,7 +62,7 @@ echo -e "/*
 
 #include \"./include/header.h\"
 
-int main(int arc, char ** arv, char **env)
+int main(int arc, char **arv, char **env)
 {
     return 0;
 }

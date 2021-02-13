@@ -12,6 +12,9 @@ endtry
 
 source ~/.vim/matchit/plugin/matchit.vim
 
+let g:loaded_matchit = 1
+
+autocmd BufWritePre * :%s/\s\+$//e
 
 " show number on right
 set relativenumber
@@ -19,18 +22,20 @@ set nu
 set autochdir
 set tags=tags;
 set encoding=UTF-8
-"set noerrorbells
-"set hidden
-set scrolloff=8
+set noerrorbells
+set hidden
+set scrolloff=10
 set nowrap
+set tw=0
 set incsearch
+set nohlsearch
 set colorcolumn=80
 "set nobackup
 
 " CTRL + _ prints length of selection
-vnoremap <C-_> "-y:echo 'length' strlen(@-)<CR>"
+vnoremap <C-l> "-y:echo 'length' strlen(@-)<CR>"
 
-
+set backspace=indent,eol,start
 
 "testing
 "set nohlsearch
@@ -42,24 +47,31 @@ vnoremap <C-_> "-y:echo 'length' strlen(@-)<CR>"
 "set omnifunc=ale#completion#OmniFunc
 
 call plug#begin()
+"Plug 'dense-analysis/ale'
 Plug 'zxqfl/tabnine-vim'
 "Plug 'Valloric/YouCompleteMe'
 "Plug 'haya14busa/incsearch.vim'
 Plug 'ghifarit53/tokyonight-vim'
+Plug 'dense-analysis/ale' " LaTeX Linting"
 Plug 'nathanalderson/yanktohtml'
 Plug 'craigemery/vim-autotag'
 Plug 'jiangmiao/auto-pairs'
+Plug 'machakann/vim-sandwich'
 Plug 'airblade/vim-gitgutter'
-Plug 'ocaml/vim-ocaml'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
+Plug 'godlygeek/tabular'
+Plug 'lervag/vimtex'
+Plug 'Lenovsky/nuake'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'gabrielelana/vim-markdown'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install()  }, 'for': ['markdown', 'vim-plug'] }
 Plug 'sudosmile/vim-epitech'
-"Plug 'w0rp/ale'
+Plug 'sheerun/vim-polyglot'
 Plug 'preservim/nerdcommenter'
 Plug 'mattn/emmet-vim'
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex'  }
-Plug 'lervag/vimtex'
+Plug 'jiangmiao/auto-pairs'
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
@@ -107,7 +119,44 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 
 
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+\       '*': ['remove_trailing_lines', 'trim_whitespace'],
+\       'ocaml': ['ocamlformat', 'ocp-indent'],
+\}
+
+let g:ale_linters = {
+\ 'python':['flake8'],
+\ 'ocaml':['merlin'],
+\}
+
+
+2match none
+map <C-e> <esc>:2match none
+map <C-g> :Goyo<CR>
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
+nnoremap <F4> :Nuake<CR>
+inoremap <F4> <C-\><C-n>:Nuake<CR>
+tnoremap <F4> <C-\><C-n>:Nuake<CR>
+
+nnoremap <F3> :MerlinErrorCheck<CR>
+
+
+
+
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+
+
+
 " ## added by OPAM user-setup for vim / base ## 93ee63e278bdfc07d1139a748ed3fff2 ## you can edit, but keep this line
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
 let s:opam_share_dir = system("opam config var share")
 let s:opam_share_dir = substitute(s:opam_share_dir, '[\r\n]*$', '', '')
 
@@ -139,16 +188,3 @@ for tool in s:opam_packages
   endif
 endfor
 " ## end of OPAM user-setup addition for vim / base ## keep this line
-
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-execute "set rtp+=" . g:opamshare . "/merlin/vim"
-
-2match none
-map <C-e> <esc>:2match none
-map <C-g> :Goyo<CR>
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
