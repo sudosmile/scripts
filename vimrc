@@ -16,7 +16,6 @@ let g:loaded_matchit = 1
 
 autocmd BufWritePre * :%s/\s\+$//e
 
-" show number on right
 set relativenumber
 set nu
 set autochdir
@@ -48,14 +47,15 @@ set backspace=indent,eol,start
 
 call plug#begin()
 "Plug 'dense-analysis/ale'
-Plug 'zxqfl/tabnine-vim'
 "Plug 'Valloric/YouCompleteMe'
 "Plug 'haya14busa/incsearch.vim'
+Plug 'zxqfl/tabnine-vim'
 Plug 'ghifarit53/tokyonight-vim'
-Plug 'dense-analysis/ale' " LaTeX Linting"
+Plug 'dense-analysis/ale'
 Plug 'nathanalderson/yanktohtml'
 Plug 'craigemery/vim-autotag'
 Plug 'jiangmiao/auto-pairs'
+Plug 'morhetz/gruvbox'
 Plug 'machakann/vim-sandwich'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
@@ -88,7 +88,6 @@ let g:user_emmet_install_global = 0
 let g:user_emmet_leader_key=','
 autocmd FileType html,css EmmetInstall
 
-" dont know about this to be tested
 syntax on
 
 filetype plugin on
@@ -104,7 +103,8 @@ endfor
 " colorscheme
 set termguicolors
 let g:tokyonight_style = 'night' " available: night, storm
-let g:tokyonight_enable_italic = 1
+let g:tokyonight_enable_italic = 0
+let g:tokyonight_disable_italic_comment = 1
 colorscheme tokyonight
 let g:lightline = {'colorscheme' : 'tokyonight'}
 "let g:tokyonight_transparent_background = 1

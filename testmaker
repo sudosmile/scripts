@@ -1,6 +1,6 @@
 #!/bin/bash
 for f in *.c;
-do 
+do
     mkdir -p $1
     touch "$1/test_$f" && echo "/*
 ** EPITECH PROJECT, 2020

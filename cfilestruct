@@ -62,7 +62,7 @@ echo -e "/*
 
 #include \"./include/header.h\"
 
-int main(int arc, char **arv, char **env)
+int main(int arc, char const * const *arv, char const * const *env)
 {
     return 0;
 }
@@ -80,29 +80,37 @@ OUTPUTFILE      =       $1
 
 SRCC            =       main.c
 
-SRCO            =       \$(SRCC:.c=.o)
+OBJ            =       \$(SRCC:.c=.o)
+
+CC = gcc
+
+CFLAGS = -W -Wall -Wextra
+
+CPPFLAGS = -Iinclude/
+
+LDFLAGS =
 
 .PHONY = all
 all:            compile
 
 .PHONY = compile
-compile:        \$(SRCO)
-${res}gcc \$(SRCO) -Iinclude -Wall -o \$(OUTPUTFILE)
+compile:        \$(OBJ)
+${res}gcc \$(OBJ) -o \$(OUTPUTFILE)
 
 .PHONY = clean
 clean:
-${res}rm -f -- \$(SRCO)
+${res}rm -f -- \$(OBJ)
 
 .PHONY = fclean
 fclean:
-${res}rm -f -- \$(SRCO)
+${res}rm -f -- \$(OBJ)
 ${res}rm -f -- \$(OUTPUTFILE)
 
 .PHONY = re
 re:             fclean compile
 " > src/Makefile
 
-if test -f ".git/info/exclude"; then
-    echo "**/*.[oa]" >> .git/info/exlude
-    echo "**/$1" >> .git/info/exlude
+if test -f "./.git/info/exclude"; then
+    echo "**/*.[oa]" >> .git/info/exclude
+    echo "**/$1" >> .git/info/exclude
 fi
